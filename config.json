@@ -1,0 +1,205 @@
+{
+  "format": {
+    "group": {
+      "stroke": "white", "fill": "white", "color": "black"},
+    "base": {
+      "stroke": "black", "fill": "white", "color": "black", "rx": "5px", "ry": "5px"},
+    "thing": {
+      "stroke": "#2C5D98", "fill": "#D0E5FF", "color": "#2C5D98"},
+    "event": {
+      "stroke": "#5C811F", "fill": "#5C811F", "color": "white"},  
+    "event_bn": {
+      "stroke": "#4A6719", "fill": "#D0DDBB", "color": "#4A6719", "rx": "20px", "ry": "20px"},      
+    "object": {
+      "stroke": "#2C5D98", "fill": "#2C5D98", "color": "white"},           
+    "object_bn": {
+      "stroke": "#1E3F67", "fill": "#94abc5", "color": "#1E3F67", "rx": "20px", "ry": "20px"},          
+    "idea": {
+      "stroke": "#1f0e9a", "fill": "#1f0e9a", "color": "white"},           
+    "idea_bn": {
+      "stroke": "#1f0e9a", "fill": "#e7e5f6", "color": "#1f0e9a", "rx": "20px", "ry": "20px"},      
+    "document": {
+      "stroke": "#2C5D98", "fill": "#33B0FF", "color": "2C5D98"},           
+    "document_bn": {
+      "stroke": "#1E3F67", "fill": "#B8E3FE", "color": "#1E3F67", "rx": "20px", "ry": "20px"},
+    "actor": {
+      "stroke": "#4e4403", "fill": "#fdde29", "color": "#4e4403"},
+    "actor_bn": {
+      "stroke": "#564F26", "fill": "#ffee8c", "color": "#564F26", "rx": "20px", "ry": "20px"},
+    "period": {
+      "stroke": "#6340b1","fill":"#6340b1", "color":"white"},
+    "period_bn": {
+      "stroke": "#6340b1","fill":"#dacef5", "color":"#6340b1", "rx": "20px", "ry": "20px"},
+    "dims": {
+      "stroke": "#9A6D3B","fill":"#9A6D3B", "color":"white"},
+    "dims_bn": {
+      "stroke": "#674928","fill":"#d4bda4", "color":"#674928","rx":"20px","ry":"20px;"},
+    "place": {
+      "stroke": "#bd4512","fill":"#bd4512", "color":"white"},
+    "place_bn": {
+      "stroke": "#9D390F","fill":"#eecaba", "color":"#9D390F","rx":"20px","ry":"20px"},      
+    "type": {
+      "stroke": "#502604", "fill": "#FAB565",  "color":"#502604", "rx":"20px","ry":"20px"}, 
+    "type_bn": {
+      "stroke": "#502604", "fill": "#F9E1C3",  "color":"#6C3304", "rx":"20px","ry":"20px"},
+    "name": {
+      "stroke": "#563800", "fill": "#FEF3BA", "color":"#563800", "rx": "20px", "ry": "20px"},
+    "literal": {
+      "stroke": "black", "fill": "#f0f0e0", "rx": "2px", "ry": "2px", "max-width": "100px"},
+    "url": {
+      "stroke": "#2C5D98", "color": "#2C5D98"},
+    "note": {
+      "stroke": "#2C5D98", "fill": "#D8FDFF", "color": "#2C5D98"},
+
+    "object2": {
+      "stroke": "black","fill":"#E1BA9C","rx":"20px","ry":"20px"},
+    "actor2": {
+      "stroke": "black","fill":"#FFBDCA","rx":"20px","ry":"20px"},    
+    "dims2": {
+      "stroke": "black","fill":"#c6c6c6","rx":"20px","ry":"20px"},
+    "type2": {
+      "stroke": "red", "fill": "#FAB565",  "rx":"20px","ry":"20px"},
+    "name2": {
+      "stroke": "orange", "fill": "#FEF3BA", "rx": "20px", "ry": "20px"},
+    "infoobj": {
+      "stroke": "#907010","fill":"#fffa40","rx":"20px","ry":"20px"},
+    "timespan": {
+      "stroke": "blue","fill":"#ddfffe","rx":"20px","ry":"20px"},
+    "place2": {
+      "stroke": "#3a7a3a","fill":"#aff090","rx":"20px","ry":"20px"},
+    "event2": {
+      "stroke": "blue","fill":"#96e0f6","rx":"20px","ry":"20px"},
+    "digital2":{
+      "stroke": "#999","fill":"#eee","rx":"5px","ry":"5px"},
+      
+      
+    "object2_bn": {
+      "stroke": "black","fill":"#E1BA9C","rx":"20px","ry":"20px"},
+    "actor2_bn": {
+      "stroke": "black","fill":"#FFBDCA","rx":"20px","ry":"20px"},    
+    "dims2_bn": {
+      "stroke": "black","fill":"#c6c6c6","rx":"20px","ry":"20px"},
+    "type2_bn": {
+      "stroke": "red", "fill": "#FAB565",  "rx":"20px","ry":"20px"},
+    "name2_bn": {
+      "stroke": "orange", "fill": "#FEF3BA", "rx": "20px", "ry": "20px"},
+    "infoobj_bn": {
+      "stroke": "#907010","fill":"#fffa40","rx":"20px","ry":"20px"},
+    "timespan_bn": {
+      "stroke": "blue","fill":"#ddfffe","rx":"20px","ry":"20px"},
+    "place2_bn": {
+      "stroke": "#3a7a3a","fill":"#aff090","rx":"20px","ry":"20px"},
+    "event2_bn": {
+      "stroke": "blue","fill":"#96e0f6","rx":"20px","ry":"20px"},
+    "digital2_bn":{
+      "stroke": "#999","fill":"#eee","rx":"5px","ry":"5px"},
+      
+    "classstyle": {
+      "stroke": "black","fill":"white"},
+    "crm": {
+      "stroke": "#333333", "fill": "#DCDCDC", "color": "#333333"},
+    "sg1": {
+      "stroke": "black", "fill": "#fefcf4", "color":"black", "rx": "10px", "ry": "10px"},
+    "sg2": {
+      "stroke": "black", "fill": "#fffffb", "color":"black", "rx": "10px", "ry": "10px"}
+  },
+  "prefix" : {
+    "ngo": {
+      "match": {
+	"short": "[Nn][Gg][Oo][:]([0-9A-Z]{3}[-].+)",
+	"long": "http[s]*[:][\/]+data[.]ng[-]london[.]org[.]uk[\/]resource[\/]([0-9A-Z]{3}[-].+)"},
+      "format": "object",
+      "url": "https://data.ng-london.org.uk/resource/"
+      }, 
+    "ng": {
+      "match": {
+	"short": "[Nn][Gg][:]([0-9A-Z]{4}[-].+)",
+	"long": "http[s]*[:][\/]+data[.]ng[-]london[.]org[.]uk[\/]([0-9A-Z]{4}[-].+)"},
+      "format": "object",
+      "url": "https://data.ng-london.org.uk/"
+      }, 
+    "aat": {
+      "match": {
+	"short": "[Aa][Aa][Tt][:](.+)",
+	"long": "http[s]*[:][\/]+vocab[.]getty[.]edu[\/]aat[\/](.+)"},
+      "format": "type",
+      "url": "http://vocab.getty.edu/aat/"
+      },    
+    "ulan": {
+      "match": {
+	"short": "[Uu][Ll][Aa][nN][:](.+)",
+	"long": "http[s]*[:][\/]+vocab[.]getty[.]edu[\/]ulan[\/](.+)"},
+      "format": "type",
+      "url": "http://vocab.getty.edu/ulan/"
+      },   
+    "tgn": {
+      "match": {
+	"short": "[Tt][Gg][Nn][:](.+)",
+	"long": "http[s]*[:][\/]+vocab[.]getty[.]edu[\/]tgn[\/](.+)"},
+      "format": "type",
+      "url": "http://vocab.getty.edu/tgn/"
+      },    
+    "wd": {
+      "match": {
+	"short": "[Ww][Dd][:](.+)",
+	"long": "http[s]*[:][\/]+www[.]wikidata[.]org[\/]wiki[\/](.+)"},
+      "format": "type",
+      "url": "https://www.wikidata.org/wiki/"
+      },
+    "note": {
+      "match": {
+	"short": "[\"].+[\"]"},
+      "format": "note"
+      },
+    "note": {
+      "match": {
+	"short": "[#34;].+[#34;]"},
+      "format": "note"
+      },
+    "crm": {
+      "match": {
+	"short": "[Cc][Rr][Mm][:](.+)"},
+      "format": "crm"
+      },
+    "sci": {
+      "match": {
+	"short": "[sS][cC][iI][:](.+)"},
+      "format": "crm"
+      },
+    "dig": {
+      "match": {
+	"short": "[Dd][Ii][Gg][:](.+)"},
+      "format": "crm"
+      },
+    "ngi": {
+      "match": {
+	"short": "[nN[[gG][iI][:](.+)"},
+      "format": "oPID"
+      },
+    "bn": {
+      "match": {
+	"short": "_[bB][nN][\\s-]*(.*)",
+	"long": "_Blank Node[\\s-]*(.*)"},
+      "format": "thing"
+      }  ,
+    "bn2": {
+      "match": {
+	"short": "_Blank Node[\\s-]*(.*)"},
+      "format": "thing"
+      }  ,
+    "url": {
+      "match": {
+	"short": "http.+"},
+      "format": "url"
+      }      
+    },
+    "unique": {
+      "comment": "Force any items with these prefixes to be a unique item in the model",
+      "regex": [
+	"[Cc][Rr][Mm][:].+",
+	"[sS][cC][Ii][:].+",
+	"[dD][iI][gG][:].+",
+	"Type"
+	]
+      }
+}

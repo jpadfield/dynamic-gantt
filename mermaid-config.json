@@ -1,0 +1,21 @@
+{
+    "maxTextSize": 900000,
+    "startOnLoad": true,
+    "securityLevel": "loose",  
+    "logLevel": 4,
+    "flowchart": 
+        {
+        "curve": "basis",
+        "useMaxWidth": false,
+        "htmlLabels": true
+        },
+    "gantt": 
+        {
+        "titleTopMargin": 25,
+        "barHeight": 20,
+        "barGap": 4,
+        "topPadding": 50,
+        "sidePadding": 50,
+        "topAxis": true 
+        }
+}
