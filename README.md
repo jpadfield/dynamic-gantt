@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/281618147.svg)](https://zenodo.org/badge/latestdoi/281618147)
+
 # dynamic-gantt
 This is an interactive live gantt or timeline system which can automatically convert simple tab separated triples into gantt charts using the [mermaid library](https://mermaid-js.github.io/mermaid). 
 
