@@ -50,11 +50,11 @@ else if (isset($_POST["triplesTxt"]) and $_POST["triplesTxt"])
    $mermaid = tsv2MermaidStr ($_POST["triplesTxt"]);}
 else if (isset($_GET["url"]))
   {$cleanTxt = getRemoteURL ($_GET["url"]);
-   $mermaid = tsv2MermaidStr ($_POST["triplesTxt"]);}
+   $mermaid = tsv2MermaidStr ($cleanTxt);}
 else if (isset($_GET["data"]) and preg_match("/^[p][a][k][o][:](.+)$/", $_GET["data"], $m))
   {
   $cleanTxt = "Please wait  tooltip  Processing supplied data";
-  $pako = $m[1];    
+  $pako = $m[1];   
   }
 else if (isset($_POST["triples"]))
   {
@@ -67,9 +67,18 @@ else if (isset($_POST["triples"]))
   exit;
   }   
 else
-  {$default = file_get_contents("default.json");
+  {$default = file_get_contents("default.csv");
    $cleanTxt = $default;
    $mermaid = tsv2MermaidStr ($default);}
+
+
+//prg(0, $start);
+//prg(0, dA ("0,10"));
+//prg(0, dA (1));
+//prg(0, dA ("1,10"));
+//prg(0, dA ("-0,10"));
+//prg(0, dA (-1));
+//prg(0, dA ("-1,10"));
 
 if ($simple)
   {$html = buildPageSimple ($cleanTxt, $mermaid);}
@@ -212,6 +221,7 @@ END;
   else
     {
     $data = explode("\n", $data);
+
     $fl = explode(" ", trim(array_shift($data), "/"));
 
     if (trim($fl[0]) == "gantt")
@@ -220,7 +230,8 @@ END;
       $title = "Mermaid Gantt Chart";
       $margin = 1;
       $first = true;
-      
+      $todayMarker = false;
+            
       foreach ($data as $k => $line) 
         {       
         $arr = line2array ($line);
@@ -232,6 +243,10 @@ END;
             {$start = $arr[1];}
           else if (strtolower($arr[0]) == "title")  
             {$title = $arr[1];}
+          else if (strtolower($arr[0]) == "today")  
+            {$todayMarker = "todayMarker off\n";}
+          else if (strtolower($arr[0]) == "width")  
+            {$customConfig["gantt"]["useWidth"] = intval($arr[1]);}
           else if (strtolower($arr[0]) == "margin")  
             {$margin = $arr[1];
 	     if ($margin > 10) {$margin = 10;}
@@ -243,7 +258,7 @@ END;
             $scode = sectionCode($arr[1]);
             if ($first)
               {$first = false;
-               $mermaidStr .=  "    title  $title\n";
+               $mermaidStr .=  "    title  $title\n".$todayMarker;
                $mermaidStr .=  "    section $arr[1]\n";
                $sno++;}
             else
@@ -255,7 +270,8 @@ END;
              $sno++;}
           }
         }
-      }    
+      } 
+
     }
     
   
@@ -268,22 +284,22 @@ function dA ($v)
   {
   global $start;
   
-  if (preg_match("/^([-]*[0-9]+)[,.]*([0-9]*)$/", $v, $a))
+  if (preg_match("/^([-]*)([0-9]+)[,.]*([0-9]*)$/", $v, $a))
     {
-    $m = intval($a[1]);
+    $m = intval($a[2]);
     
-    if($a[2])
-      {$d = intval($a[2]-1);}
+    if($a[3])
+      {$d = intval($a[3]-1);}
     else
       {$d = 0;}
     
     $date=new DateTime($start); // date object created.
 
     $invert = 0;
-    if ($m < 0 or $d < 0)
+    if ($a[1])
       {$invert = 1;
        $m = abs($m);
-       $d = abs($d);}
+       if ($d) {$d = abs($d + 1);}}
        
     $di = new DateInterval('P'.$m.'M'.$d.'D');
     $di->invert = $invert;
@@ -613,8 +629,14 @@ var maxLeft = 80;
       });
   });
 
-
-
+//start = "2024-10-01"
+//console.log(start);
+//console.log(dA ("0,10"));
+//console.log(dA (1));
+//console.log(dA ("1,10"));
+//console.log(dA ("-0,10"));
+//console.log(dA (-1));
+//console.log(dA ("-1,10"));
 
 ////////////////////////////////
     

@@ -242,22 +242,166 @@ async function f2(period) {
 function processTriples (triples)
   { 
   console.log("processTriples");
-  //console.log(triples);
-  $.ajax({ method: "POST", url: "index.php", 
-      data: {'triples': triples},
-      }).done(function( data ) { 
-      console.log(data);
-      //var result = $.parseJSON(data); 
-      $("#triplesTxt").html(data.triples);
-      $("#modelDiv").html(data.mermaid);
+  console.log(triples);
+  
+  let jscode = tsv2MermaidStr(triples)
+  console.log(jscode);
 
-      const bmCompressed = pako.deflate($("#triplesTxt").text().trim(), { level: 9 });
-      const bmData = Base64.fromUint8Array(bmCompressed, true);
-      const bmURL = "./?data=pako:"+bmData;
-      $("#bookmark").attr("href", bmURL);
-      
-      f1();
-      //$( "#refreshM" ).trigger( "click" );
-      //console.log(data);  
-      });     
+  $("#triplesTxt").html(triples);
+  $("#modelDiv").html(jscode);
+
+  const bmCompressed = pako.deflate($("#triplesTxt").text().trim(), { level: 9 });
+  const bmData = Base64.fromUint8Array(bmCompressed, true);
+  const bmURL = "./?data=pako:"+bmData;
+  $("#bookmark").attr("href", bmURL);
+  f1();  
   }
+  
+let start = false;
+
+let customConfig = {};
+
+function tsv2MermaidStr(data) {
+
+  let mermaidStr = "";
+  let dataLines = data.split("\n");
+  
+  let firstLine = dataLines.shift().trim().split(" ");
+  if (firstLine[0] === "gantt") {
+    
+    mermaidStr += "gantt\n dateFormat YYYY-MM-DD\n";
+    
+    let title = "Mermaid Gantt Chart";
+    let margin = 1;
+    let first = true;
+    
+    dataLines.forEach((line, index) => {
+      let arr = line2array(line);
+      arr = fill(arr, 4);
+      console.log(arr)
+      
+      if (arr && arr[0]) {
+	let sno = 0;
+	let scode = "";
+	  
+        if (["start date", "start"].includes(arr[0].toLowerCase())) {
+          start = arr[1]; 
+        } else if (arr[0].toLowerCase() === "title") {
+          title = arr[1];
+        } else if (arr[0].toLowerCase() === "margin") {
+          margin = arr[1];
+          if (margin > 10) margin = 10;
+          if (margin < 1) margin = 1;
+          
+          // Initialize if falsey 
+	  customConfig.gantt ??= {};
+
+	  // Set property
+	  customConfig.gantt.leftPadding = 50 * margin;
+        } else if (arr[0].toLowerCase() === "group") {
+          sno = 0;
+          scode = sectionCode(arr[1]);
+          
+          if (first) {
+            first = false;
+            mermaidStr += " title " + title + "\n";
+            mermaidStr += " section " + arr[1] + "\n";
+            sno++;
+          } else {
+            mermaidStr += " section " + arr[1] + "\n";
+          }
+        } else {
+          if (arr[3]) arr[3] = arr[3] + ", ";
+          
+          mermaidStr += " " + arr[0] + " :" + arr[3] + scode + sno + ", " + dA(arr[1]) + ", " + dA(arr[2]) + "\n";
+          sno++;
+        }
+      }
+    });
+ 
+  }
+  
+  return mermaidStr;
+}
+
+function fill(arr, len, fill = false) {
+  return arr.concat(Array(Math.max(0, len - arr.length)).fill(fill));
+}
+
+
+function sectionCode(string) {
+  return string.replace(/[^A-Za-z0-9]/g, '').toLowerCase();
+}
+
+function line2array(line) {
+  line = line.trim();
+  
+  if (/^[/][/].*$/.test(line)) {
+    return [];
+  } else if (/^.+[\t].+$/.test(line)) {
+    return line.split("\t");  
+  } else if (/^.+[,].+$/.test(line)) {
+    return line.split(",");
+  } else {
+    return [line];
+  }
+}
+
+function dA(v) {
+  //start -- should be defined as a global variable.
+  v = v.toString(); // force v to be a string in case it is a number
+  var a = v.match(/^([-]*)([0-9]+)[,.]*([0-9]*)$/);
+
+  if (a) {
+    var m = parseInt(a[2], 10);
+    var d = a[3] ? parseInt(a[3]) - 1 : 0;
+    var date = new Date(start);
+
+    if (a[1]) {
+      m = m * -1;
+      if (d) {d = (d + 1) * -1;}
+      }
+
+    date.setMonth(date.getMonth() + m);
+    date.setDate(date.getDate() + d);
+      
+    var out = date.toISOString().slice(0, 10);
+    } 
+  else {
+    var time = Date.parse(v);
+    var date = new Date(time);
+    var out = date.toISOString().slice(0, 10);    
+    }
+
+  return out;
+  }
+
+
+function dAOLD(v) {
+  console.log(start)
+  if (/^([-]*[0-9]+)[,.]*([0-9]*)$/.test(v)) {
+    let m = parseInt(RegExp.$1);
+    let d = RegExp.$2 ? parseInt(RegExp.$2) - 1 : 0;
+    console.log(m)
+    console.log(d)
+    let date = new Date(start); 
+    let invert = m < 0 || d < 0;
+    if (invert) {
+      m = Math.abs(m);
+      d = Math.abs(d);
+    }
+    
+    let di = {
+      unit: 'month',
+      value: m,
+      day: d
+    };
+    di.invert = invert;
+    date.set(di); 
+    
+    return date.toISOString().split('T')[0];
+  } else {
+    let time = Date.parse(v);
+    return new Date(time).toISOString().split('T')[0];
+  }
+}
