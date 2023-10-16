@@ -49,8 +49,13 @@ else if (isset($_POST["triplesTxt"]) and $_POST["triplesTxt"])
   {$cleanTxt = $_POST["triplesTxt"];
    $mermaid = tsv2MermaidStr ($_POST["triplesTxt"]);}
 else if (isset($_GET["url"]))
-  {$cleanTxt = getRemoteURL ($_GET["url"]);
-   $mermaid = tsv2MermaidStr ($cleanTxt);}
+  {
+  $cleanTxt = getRemoteURL ($_GET["url"]);
+  if (!$cleanTxt)
+    {$cleanTxt = "gantt\n//Sorry supplied URL not found.\n".
+      "Data Missing	0	6	crit";}  
+  $mermaid = tsv2MermaidStr ($cleanTxt);      
+  }
 else if (isset($_GET["data"]) and preg_match("/^[p][a][k][o][:](.+)$/", $_GET["data"], $m))
   {
   $cleanTxt = "Please wait  tooltip  Processing supplied data";

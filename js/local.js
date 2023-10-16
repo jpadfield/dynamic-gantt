@@ -168,7 +168,7 @@ $(document).ready(function()
     const d1 = Base64.toUint8Array(pcode);
     const d2 = pako.inflate(d1, { to: 'string' })
     console.log("Pako String");
-    console.log(d2);    
+    //console.log(d2);    
     processTriples (d2);    
     }
   else {
@@ -242,7 +242,7 @@ async function f2(period) {
 function processTriples (triples)
   { 
   console.log("processTriples");
-  console.log(triples);
+  //console.log(triples);
   
   let jscode = tsv2MermaidStr(triples)
   console.log(jscode);
@@ -274,11 +274,12 @@ function tsv2MermaidStr(data) {
     let title = "Mermaid Gantt Chart";
     let margin = 1;
     let first = true;
+    let todayMarker = false;
     
     dataLines.forEach((line, index) => {
       let arr = line2array(line);
       arr = fill(arr, 4);
-      console.log(arr)
+      //console.log(arr)
       
       if (arr && arr[0]) {
 	let sno = 0;
@@ -288,7 +289,14 @@ function tsv2MermaidStr(data) {
           start = arr[1]; 
         } else if (arr[0].toLowerCase() === "title") {
           title = arr[1];
-        } else if (arr[0].toLowerCase() === "margin") {
+        } else if (arr[0].toLowerCase() === "today") {
+	  todayMarker = "todayMarker off\n";
+	} else if (arr[0].toLowerCase() === "width") {	  
+	  // Initialize if falsey 
+	  customConfig.gantt ??= {};
+	  // Set property
+	  customConfig.gantt.useWidth = arr[1] * 1;	  
+	} else if (arr[0].toLowerCase() === "margin") {
           margin = arr[1];
           if (margin > 10) margin = 10;
           if (margin < 1) margin = 1;
@@ -304,7 +312,7 @@ function tsv2MermaidStr(data) {
           
           if (first) {
             first = false;
-            mermaidStr += " title " + title + "\n";
+            mermaidStr += " title " + title + "\n" + todayMarker;
             mermaidStr += " section " + arr[1] + "\n";
             sno++;
           } else {
